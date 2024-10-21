@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master  # Trigger on push to master
+      - dev
 
 jobs:
   deploy:
