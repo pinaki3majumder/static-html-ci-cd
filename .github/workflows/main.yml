@@ -1,0 +1,30 @@
+name: Deploy to Environments
+
+on:
+  push:
+    branches:
+      - master  # Trigger on push to master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config user.name "Your Name"
+          git config user.email "your.email@example.com"
+    
+      - name: Deploy HTML file to Prod
+        run: |
+          echo "Deploying to Prod environment"
+          git checkout master
+          mkdir -p ./prod
+          cp index.html ./prod/index.html
+          git add prod/index.html
+          git commit -m "Deploy to Prod"
+          git push origin master || echo "Failed to push to master branch"
+  
