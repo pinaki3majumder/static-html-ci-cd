@@ -17,7 +17,18 @@ jobs:
         run: |
           git config user.name "Your Name"
           git config user.email "your.email@example.com"
-    
+
+      - name: Deploy HTML file to Dev
+        run: |
+          echo "Deploying to Dev environment"
+          git fetch origin  # Fetch branches from the remote
+          git checkout dev  # Check out the dev branch
+          mkdir -p ./dev    # Create the dev directory if it doesn't exist
+          cp index.html ./dev/index.html
+          git add dev/index.html
+          git commit -m "Deploy to Dev"
+          git push origin dev || echo "Failed to push to dev branch"
+          
       - name: Deploy HTML file to Prod
         run: |
           echo "Deploying to Prod environment"
